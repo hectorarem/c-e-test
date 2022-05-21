@@ -1,0 +1,13 @@
+<mat-toolbar>
+  <span>Cuban Engineer Test. File Management</span>
+  <span class="example-spacer"></span>
+  <button *ngIf="!isLogin()" mat-icon-button routerLink="/access/login" aria-label="Login" title="Login">
+    <mat-icon>login</mat-icon>
+  </button>
+  <button *ngIf="isLogin()" mat-icon-button  aria-label="Logout" (click)="Logout()"  title="Logout">
+    <mat-icon>logout</mat-icon>
+  </button>
+  <button *ngIf="!isLogin()" mat-icon-button aria-label="Registro"  title="Registro">
+    <mat-icon>app_registration</mat-icon>
+  </button>
+</mat-toolbar>
