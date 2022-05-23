@@ -51,10 +51,10 @@ class File(models.Model):
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
         if self.file_extension != 'zip':
-            zip = ZipFile(self.file.path + '.zip', mode='w').write(self.file.path, self.file_full_name)
+            ZipFile(self.file.path + '.zip', mode='w').write(self.file.path, self.file_full_name)
             old_file = self.file.path
             self.file.name = self.file.name + ".zip"
             os.remove(old_file)
-            super().save(*args, **kwargs)
+            super().save()
 
 
