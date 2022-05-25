@@ -53,7 +53,7 @@ REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
          'rest_framework.permissions.IsAuthenticated'],
     'DEFAULT_PAGINATION_CLASS': 'FileApp.pagination.StandardResultsSetPagination',
-    'PAGE_SIZE': 1,
+    'PAGE_SIZE': 10,
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework_simplejwt.authentication.JWTAuthentication',
         'rest_framework.authentication.SessionAuthentication',
