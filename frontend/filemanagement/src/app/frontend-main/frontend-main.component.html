@@ -1,0 +1,43 @@
+<app-header></app-header>
+<div class="content">
+  <table class="styled-table">
+    <thead>
+    <tr>
+      <th *ngFor="let name of displayedColumns">
+        {{name}}
+      </th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let file of dataSource">
+      <td>
+        {{file.created_at|date:'Y-M-d'}}
+      </td>
+      <td>
+        {{file.uploaded_by}}
+      </td>
+      <td>
+          {{file.file_name}}
+      </td>
+      <td>
+        {{file.file_extension}}
+      </td>
+      <td>
+        {{file.file_size}}
+      </td>
+      <td>
+        <a href="#" style="color: #0d47a1">
+        <mat-icon aria-hidden="false">edit</mat-icon>
+        </a>
+        <a href="#" style="color: #0d47a1">
+        <mat-icon aria-hidden="false">delete</mat-icon>
+        </a>
+        <a href="{{file.file}}" style="color: #0d47a1">
+          <mat-icon aria-hidden="false">download</mat-icon>
+        </a>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+

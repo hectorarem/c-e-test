@@ -2,8 +2,8 @@ import { RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { ForntendMainRoutingModule } from './forntend-main-routing.module';
-import { ForntendMainComponent } from './forntend-main.component';
+import { FrontendMainRoutingModule } from './frontend-main-routing.module';
+import { FrontendMainComponent } from './frontend-main.component';
 import {SharedModule} from '../shared/shared.module';
 import {MaterialModule} from "../../material.module";
 import {MatNativeDateModule} from "@angular/material/core";
@@ -12,11 +12,11 @@ import {FlexLayoutModule} from "@angular/flex-layout";
 
 @NgModule({
   declarations: [
-    ForntendMainComponent,
+    FrontendMainComponent,
   ],
   imports: [
     CommonModule,
-    ForntendMainRoutingModule,
+    FrontendMainRoutingModule,
     SharedModule,
     RouterModule,
     MatNativeDateModule,
@@ -24,4 +24,4 @@ import {FlexLayoutModule} from "@angular/flex-layout";
     FlexLayoutModule,
   ],
 })
-export class ForntendMainModule { }
+export class FrontendMainModule { }

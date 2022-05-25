@@ -6,8 +6,8 @@ const routes: Routes = [
   {
     path: '',
     loadChildren: () =>
-      import('./forntend-main/forntend-main.module').then(
-        (m) => m.ForntendMainModule
+      import('./frontend-main/frontend-main.module').then(
+        (m) => m.FrontendMainModule
       ),
     canActivate: [AuthGuard],
   },

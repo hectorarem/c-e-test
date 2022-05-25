@@ -8,9 +8,9 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root',
 })
 export class AuthenticationService {
-  userUrl = environment.authUrl + 'auth/login';
-  userLogout = environment.authUrl + 'auth/logout';
-  urlSingUp = environment.authUrl + 'auth/register/';
+  userUrl = environment.baseUrl + 'auth/login';
+  userLogout = environment.baseUrl + 'auth/logout';
+  urlSingUp = environment.baseUrl + 'auth/register/';
 
   constructor(private httpClient: HttpClient) {}
 
@@ -47,6 +47,7 @@ export class AuthenticationService {
 
 
   updateUserToken(resp: any) {
+    localStorage.setItem('access', resp.access);
     const dataString = JSON.stringify(resp.user);
     try {
       localStorage.setItem('user', dataString);

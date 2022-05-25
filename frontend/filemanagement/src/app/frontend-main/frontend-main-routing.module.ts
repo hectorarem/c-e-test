@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { ForntendMainComponent } from './forntend-main.component';
+import { FrontendMainComponent } from './frontend-main.component';
 
-const routes: Routes = [{ path: '', component: ForntendMainComponent }];
+const routes: Routes = [{ path: '', component: FrontendMainComponent }];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class ForntendMainRoutingModule { }
+export class FrontendMainRoutingModule { }

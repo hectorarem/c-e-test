@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ForntendMainComponent } from './forntend-main.component';
+import { FrontendMainComponent } from './frontend-main.component';
 
-describe('ForntendMainComponent', () => {
-  let component: ForntendMainComponent;
-  let fixture: ComponentFixture<ForntendMainComponent>;
+describe('FrontendMainComponent', () => {
+  let component: FrontendMainComponent;
+  let fixture: ComponentFixture<FrontendMainComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ForntendMainComponent ]
+      declarations: [ FrontendMainComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ForntendMainComponent);
+    fixture = TestBed.createComponent(FrontendMainComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
