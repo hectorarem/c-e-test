@@ -10,7 +10,8 @@ export class FileService {
   baseUrl = environment.baseUrl + 'file/';
   constructor(private httpClient: HttpClient) {}
 
-  getFiles(): Observable<any> {
+  getFiles(url:string | null): Observable<any> {
+    const url_r = url ? url : this.baseUrl + 'file';
     const access = localStorage.getItem('access');
     const httpOptions = {
       headers: new HttpHeaders({
@@ -18,6 +19,6 @@ export class FileService {
         'Authorization': 'Bearer ' + access,
       }),
     };
-    return this.httpClient.get(this.baseUrl + 'file', httpOptions) as Observable<any>
+    return this.httpClient.get(url_r, httpOptions) as Observable<any>
   }
 }

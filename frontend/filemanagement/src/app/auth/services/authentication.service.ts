@@ -29,6 +29,7 @@ export class AuthenticationService {
   }
 
   logout(): Observable<any> {
+    localStorage.clear();
     return this.httpClient.get(this.userLogout);
   }
 
