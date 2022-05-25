@@ -39,15 +39,16 @@ class ChangeFileNameApiView(APIView):
         id = self.request.data.get('id', None)
         if id and name:
             file = File.objects.get(pk=int(id))
-            with ZipFile(file.file.path, 'r') as zip_ref:
-                zip_ref.extractall(settings.MEDIA_ROOT / 'upload')
-                old_file_zip = file.file.path
-                old_file = old_file_zip.replace('.zip', '')
-                new_name = f'upload/{name}.{file.file_extension}'
-                new_file = settings.MEDIA_ROOT / new_name
-                os.renames(old_file, new_file)
-                file.file.name = new_name
-                file.save()
-                os.remove(old_file_zip)
-                return JsonResponse({'success': True})
+            if name != file.file_name:
+                with ZipFile(file.file.path, 'r') as zip_ref:
+                    zip_ref.extractall(settings.MEDIA_ROOT / 'upload')
+                    old_file_zip = file.file.path
+                    old_file = old_file_zip.replace('.zip', '')
+                    new_name = f'upload/{name}.{file.file_extension}'
+                    new_file = settings.MEDIA_ROOT / new_name
+                    os.renames(old_file, new_file)
+                    file.file.name = new_name
+                    file.save()
+                    os.remove(old_file_zip)
+                    return JsonResponse({'success': True})
         return JsonResponse({'success': False})
