@@ -8,6 +8,17 @@ class FileSerializer(serializers.ModelSerializer):
         model = File
         fields = ['file', 'uploaded_by']
 
+    def create(self, validated_data):
+        file = validated_data['file']
+        clean_file = file.name.replace(" ", "_").replace("(", '').replace(")", '').replace("[", '').replace("]", '')
+        file_name = f'upload/{clean_file}.zip'
+        print(file_name)
+        if File.objects.filter(file=file_name).exists():
+            raise serializers.ValidationError({
+                'msg': 'Ya tenemos un fichero con ese nombre, por favor, cambie el nombre e intente nuevamente'
+            })
+        return super().create(validated_data)
+
 class ReadFileSerializer(serializers.ModelSerializer):
     uploaded_by = serializers.SerializerMethodField()
 
