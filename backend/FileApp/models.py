@@ -30,7 +30,6 @@ class File(models.Model):
 
     @property
     def file_name(self):
-
         return ".".join(self.file.name.split('/')[-1].split('.')[0:-2])
 
     @property

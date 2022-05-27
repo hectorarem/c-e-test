@@ -1,5 +1,4 @@
-import {AfterViewInit, Component, OnInit} from '@angular/core';
-import {MatTableDataSource} from '@angular/material/table';
+import {ViewChild, Component, OnInit} from '@angular/core';
 import {FileService} from "./services/file.service";
 import {AuthenticationService} from "../auth/services/authentication.service";
 import {ToastrService} from "ngx-toastr";
@@ -19,6 +18,12 @@ export class FrontendMainComponent implements OnInit{
   list_count=0;
   previous=null;
   next=null;
+  filename='';
+  file:any;
+  @ViewChild('fileid', {static: false})
+  InputVar: any;
+  fileLoading=false;
+  user:any;
 
   constructor(
     private fileService: FileService,
@@ -26,10 +31,11 @@ export class FrontendMainComponent implements OnInit{
     private toastr: ToastrService,
     private showToastr: ShowToastrService,
     private router: Router,
-    ) {  }
+    ) { }
 
   ngOnInit(): void {
     this.dataload(null);
+    this.user = this.authService.getUser()
   }
 
   dataload(url:string | null): void {
@@ -49,6 +55,63 @@ export class FrontendMainComponent implements OnInit{
   }
   moveToPagePrevious(): void {
     this.dataload(this.previous);
+  }
+
+  onFileSelected(event:any) {
+    // todo validar nombre de fichero
+
+    const file:File = event.target.files[0];
+    if(file.size < 104857600){
+      this.file = file;
+    } else {
+      this.showToastr.showInfo('Hasta 100 megas por favor.', 'Pesa mucho!!!');
+      this.cleanFileInput();
+    }
+  }
+
+  fileUpload() {
+    this.fileLoading = true;
+    const self = this;
+    setTimeout(function(){
+    // for simulate the upload file, in a real server, quit setTimeout
+    if(self.file) {
+      const formData = new FormData();
+      formData.append('file', self.file, self.file.name);
+      const user_id = localStorage.getItem('id' ) || '1';
+      formData.append('uploaded_by', user_id);
+      self.fileService.createFile(formData).subscribe(resp => {
+        self.showToastr.showSucces('Fichero subido al server', 'INFO!');
+        self.dataload(null);
+        self.cleanFileInput();
+        self.fileLoading = false;
+      }, error => {
+        if (error?.error?.msg) {
+          self.showToastr.showError(error.error.msg, 'Error!');
+        } else {
+          self.showToastr.showError('Fichero no subido, contacte con el admon', 'Error!');
+        }
+        self.fileLoading = false;
+        self.cleanFileInput();
+      })
+    }
+    }, 2000);
+  }
+
+  fileDelete(id:string) {
+    const result = confirm("¿Desea eliminar el fichero? La información no podrá restarurarse");
+    if (result) {
+      this.fileService.deleteFile(id).subscribe(resp =>{
+        this.showToastr.showInfo('Fichero eliminado', 'INFO!');
+        this.dataload(null);
+      }, error => {
+        this.showToastr.showError('Fichero no eliminado, contacte con el admon', 'Error!');
+      })
+    }
+  }
+
+  cleanFileInput(): void {
+    this.file = null;
+    this.InputVar.nativeElement.value = ''
   }
 
 }

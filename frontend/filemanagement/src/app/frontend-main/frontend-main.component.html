@@ -1,4 +1,17 @@
 <app-header></app-header>
+<div class="content-file">
+  <div class="body">
+    <mat-progress-bar *ngIf="fileLoading" mode="indeterminate"></mat-progress-bar>
+    <br *ngIf="fileLoading">
+    <div class="file-upload-right" *ngIf="file">
+      <span (click)="fileUpload()">SUBIR</span>
+    </div>
+    <div class="file-upload-left">
+      <label for="file_id">Subir nuevo fichero</label>
+      <input id="file_id" type="file" [multiple]="false" (change)="onFileSelected($event)" #fileid>
+    </div>
+  </div>
+</div>
 <div class="content">
   <table class="styled-table">
     <thead>
@@ -26,15 +39,16 @@
         {{file.file_size}}
       </td>
       <td>
-        <a href="#" style="color: #0d47a1">
-        <mat-icon aria-hidden="false">edit</mat-icon>
-        </a>
-        <a href="#" style="color: #0d47a1">
-        <mat-icon aria-hidden="false">delete</mat-icon>
-        </a>
         <a href="{{file.file}}" style="color: #0d47a1">
           <mat-icon aria-hidden="false">download</mat-icon>
         </a>
+        <a href="#" style="color: #0d47a1">
+        <mat-icon aria-hidden="false">edit</mat-icon>
+        </a>
+        <a *ngIf="user.username===file.uploaded_by" href="#" (click)="fileDelete(file.id)" style="color: #0d47a1">
+        <mat-icon aria-hidden="false">delete</mat-icon>
+        </a>
+
       </td>
     </tr>
     </tbody>

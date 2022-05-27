@@ -52,7 +52,8 @@ export class AuthenticationService {
     const dataString = JSON.stringify(resp.user);
     try {
       localStorage.setItem('user', dataString);
-      localStorage.setItem('id', resp.id);
+      localStorage.setItem('id', resp.user.id);
+      localStorage.setItem('username', resp.user.username);
     } catch (e) {}
     // this.$loggedInUserUpdated.next(dataString);
   }

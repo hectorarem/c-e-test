@@ -12,13 +12,24 @@ export class FileService {
 
   getFiles(url:string | null): Observable<any> {
     const url_r = url ? url : this.baseUrl + 'file';
+    return this.httpClient.get(url_r, this.getHeaders()) as Observable<any>
+  }
+  createFile(data:any): Observable<any> {
+    const url = this.baseUrl + 'file/';
+    return this.httpClient.post(url, data, this.getHeaders()) as Observable<any>
+  }
+  deleteFile(id:string): Observable<any> {
+    const url = this.baseUrl + 'file/' + id + '/';
+    return this.httpClient.delete(url, this.getHeaders()) as Observable<any>
+  }
+
+  getHeaders() {
     const access = localStorage.getItem('access');
     const httpOptions = {
       headers: new HttpHeaders({
-        'Content-Type': 'application/json',
         'Authorization': 'Bearer ' + access,
       }),
     };
-    return this.httpClient.get(url_r, httpOptions) as Observable<any>
+    return httpOptions;
   }
 }
