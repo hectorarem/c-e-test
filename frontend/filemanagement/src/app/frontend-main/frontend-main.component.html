@@ -41,15 +41,18 @@
           <mat-icon aria-hidden="false">edit</mat-icon>
         </a>
         <div id="file_id_{{file.id}}" hidden>
-          <input id="file_name_id_{{file.id}}" type="text" value="{{file.file_name}}">
+          <input style="padding: 5px" id="file_name_id_{{file.id}}" type="text" value="{{file.file_name}}">
           <a (click)="changeFileName(file.id)" style="color: #0d47a1" title="Guardar">
             <mat-icon aria-hidden="false">save</mat-icon>
+          </a>
+          <a (click)="inactiveFileName(file.id)" style="color: indianred" title="Cerrar">
+            <mat-icon aria-hidden="false">close</mat-icon>
           </a>
         </div>
 
       </td>
       <td>
-        {{file.file_extension}}
+        <b id="file_ext_{{file.id}}">{{file.file_extension}}</b>
       </td>
       <td>
         {{file.file_size}}
@@ -59,7 +62,7 @@
           <mat-icon aria-hidden="false">download</mat-icon>
         </a>
 
-        <a title="Eliminar" *ngIf="user.username===file.uploaded_by" href="#" (click)="fileDelete(file.id)" style="color: #0d47a1">
+        <a title="Eliminar" *ngIf="user.username===file.uploaded_by"  (click)="fileDelete(file.id)" style="color: #0d47a1">
         <mat-icon aria-hidden="false">delete</mat-icon>
         </a>
 

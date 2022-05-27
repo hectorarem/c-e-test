@@ -22,9 +22,9 @@ export class FileService {
     const url = this.baseUrl + 'file/' + id + '/';
     return this.httpClient.delete(url, this.getHeaders()) as Observable<any>
   }
-  changeFileName(id:string, name:string): Observable<any> {
+  changeFileName(id:string, name:string, ext:string): Observable<any> {
     const url = this.baseUrl + 'change/filename/';
-    return this.httpClient.post(url,{id:id, name:name}, this.getHeaders()) as Observable<any>
+    return this.httpClient.post(url,{id:id, name:name, ext:ext}, this.getHeaders()) as Observable<any>
   }
 
   getHeaders() {
