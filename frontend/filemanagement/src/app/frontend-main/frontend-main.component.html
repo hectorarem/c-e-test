@@ -3,8 +3,9 @@
   <div class="body">
     <mat-progress-bar *ngIf="fileLoading" mode="indeterminate"></mat-progress-bar>
     <br *ngIf="fileLoading">
-    <div class="file-upload-right" *ngIf="file">
-      <span (click)="fileUpload()">SUBIR</span>
+    <div class="file-upload-right" >
+      <span class="file-buttom-active" *ngIf="file" (click)="fileUpload()">SUBIR</span>
+      <span class="file-buttom" *ngIf="!file" >SUBIR</span>
     </div>
     <div class="file-upload-left">
       <label for="file_id">Subir nuevo fichero</label>
@@ -30,7 +31,22 @@
         {{file.uploaded_by}}
       </td>
       <td>
-          {{file.file_name}}
+          <span id="file_{{file.id}}">{{file.file_name}}</span>
+        <a
+          id="file_edit_id_{{file.id}}"
+          style="color: #0d47a1"
+          title="Editar nombre del fichero"
+          (click)="activeEditFileName(file.id)"
+        >
+          <mat-icon aria-hidden="false">edit</mat-icon>
+        </a>
+        <div id="file_id_{{file.id}}" hidden>
+          <input id="file_name_id_{{file.id}}" type="text" value="{{file.file_name}}">
+          <a (click)="changeFileName(file.id)" style="color: #0d47a1" title="Guardar">
+            <mat-icon aria-hidden="false">save</mat-icon>
+          </a>
+        </div>
+
       </td>
       <td>
         {{file.file_extension}}
@@ -39,13 +55,11 @@
         {{file.file_size}}
       </td>
       <td>
-        <a href="{{file.file}}" style="color: #0d47a1">
+        <a href="{{file.file}}" style="color: #0d47a1" title="Descargar">
           <mat-icon aria-hidden="false">download</mat-icon>
         </a>
-        <a href="#" style="color: #0d47a1">
-        <mat-icon aria-hidden="false">edit</mat-icon>
-        </a>
-        <a *ngIf="user.username===file.uploaded_by" href="#" (click)="fileDelete(file.id)" style="color: #0d47a1">
+
+        <a title="Eliminar" *ngIf="user.username===file.uploaded_by" href="#" (click)="fileDelete(file.id)" style="color: #0d47a1">
         <mat-icon aria-hidden="false">delete</mat-icon>
         </a>
 

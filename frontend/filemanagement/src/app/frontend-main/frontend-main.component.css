@@ -85,9 +85,15 @@ td, th {
   float: left;
   width: 50%;
 }
-.file-upload-right span{
+.file-upload-right .file-buttom-active{
   padding: 10px 20px;
   background-color: #673ab7;
   color: white;
   cursor: pointer;
+}
+.file-upload-right .file-buttom{
+  padding: 10px 20px;
+  background-color: gray;
+  color: white;
+  cursor: not-allowed;
 }

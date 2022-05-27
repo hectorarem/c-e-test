@@ -114,5 +114,35 @@ export class FrontendMainComponent implements OnInit{
     this.InputVar.nativeElement.value = ''
   }
 
+  activeEditFileName(id:string) {
+    const edit_file_id = 'file_edit_id_' + id;
+    let edit_file = document.getElementById(edit_file_id);
+    edit_file!.hidden = true;
+    const input_file_id = 'file_id_' + id;
+    let input_file = document.getElementById(input_file_id);
+    input_file!.hidden = false;
+  }
+
+  inactiveFileName(id:string) {
+    const edit_file_id = 'file_edit_id_' + id;
+    let edit_file = document.getElementById(edit_file_id);
+    edit_file!.hidden = false;
+    const input_file_id = 'file_id_' + id;
+    let input_file = document.getElementById(input_file_id);
+    input_file!.hidden = true;
+  }
+
+  changeFileName(id:string) {
+    //todo validar nombre nuevo de fichero
+    const filename = document.getElementById('file_name_id_' + id) as HTMLInputElement;
+    this.fileService.changeFileName(id, filename.value).subscribe(resp => {
+      let new_name = document.getElementById('file_' + id) as HTMLSpanElement;
+      new_name.innerHTML = filename.value;
+      this.inactiveFileName(id);
+      this.showToastr.showSucces("Nombre del fichero cambiado exitosamente!", "Super!!")
+      // todo hay que actualizar la url de descarga tambien, para no hacer un reload a la tabla
+    })
+  }
+
 }
 
