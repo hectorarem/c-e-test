@@ -9,9 +9,6 @@ class File(models.Model):
     file = models.FileField('fichero', upload_to='upload/', validators=[validate_file_size])
     uploaded_by = models.ForeignKey('auth.User', related_name='user', on_delete=models.DO_NOTHING)
 
-    # TODO considerar hacer publico o no el fichero
-    # public = models.BooleanField('es público', default=True)
-
     class Meta:
         verbose_name = 'file cargado'
         verbose_name_plural = 'files cargados'
