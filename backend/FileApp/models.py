@@ -30,11 +30,11 @@ class File(models.Model):
 
     @property
     def file_name(self):
-        return self.file.name.split('/')[-1].split('.')[0]
+        return ".".join(self.file.name.split('/')[-1].split('.')[0:-2])
 
     @property
     def file_extension(self):
-        return self.file.name.split('/')[-1].split('.')[1]
+        return self.file.name.split('/')[-1].split('.')[-2]
 
     @property
     def file_size(self):
