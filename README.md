@@ -1,9 +1,9 @@
 # c-e-test `InstaShare`
 
-#####The frontend 
+####The frontend 
 should be implemented with the latest stable version of the frontend technology specified by your job application. The frontend should be based on modern UI/UX principles and methodologies.
 
-#####The backend 
+####The backend 
 should be implemented as an independent JSON-based Web service powered by a database or a distributed file system (DFS).
 
 #### Description
