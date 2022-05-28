@@ -13,6 +13,15 @@ td, th {
   width: 25%;
 }
 
+.styled-filter {
+  border-collapse: collapse;
+  margin: 25px 0;
+  font-family: sans-serif;
+  min-width: 400px;
+  margin-left: 20px;
+  font-size: 15px;
+  width: 30%;
+}
 .styled-table {
   border-collapse: collapse;
   margin: 25px 0;

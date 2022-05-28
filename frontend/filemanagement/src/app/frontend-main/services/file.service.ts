@@ -10,9 +10,10 @@ export class FileService {
   baseUrl = environment.baseUrl + 'file/';
   constructor(private httpClient: HttpClient) {}
 
-  getFiles(url:string | null): Observable<any> {
+  getFiles(url:string | null, filter:string | null): Observable<any> {
     const url_r = url ? url : this.baseUrl + 'file';
-    return this.httpClient.get(url_r, this.getHeaders()) as Observable<any>
+    const url_f = filter && url ? url_r + '&filter=' + filter : filter ? url_r + '?filter=' + filter : url_r;
+    return this.httpClient.get(url_f, this.getHeaders()) as Observable<any>
   }
   createFile(data:any): Observable<any> {
     const url = this.baseUrl + 'file/';

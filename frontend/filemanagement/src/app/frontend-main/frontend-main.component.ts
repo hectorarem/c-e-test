@@ -25,6 +25,7 @@ export class FrontendMainComponent implements OnInit{
   fileLoading=false;
   tableLoading=false;
   user:any;
+  filter='';
 
   constructor(
     private fileService: FileService,
@@ -35,13 +36,13 @@ export class FrontendMainComponent implements OnInit{
     ) { }
 
   ngOnInit(): void {
-    this.dataload(null);
+    this.dataload(null, this.filter);
     this.user = this.authService.getUser()
   }
 
-  dataload(url:string | null): void {
+  dataload(url:string | null, filter:string | null): void {
     this.tableLoading = true;
-    this.fileService.getFiles(url).subscribe(resp => {
+    this.fileService.getFiles(url, filter).subscribe(resp => {
       this.dataSource = resp.results;
       this.previous = resp.previous;
       this.next = resp.next;
@@ -55,10 +56,10 @@ export class FrontendMainComponent implements OnInit{
     })
   }
   moveToPageNext(): void {
-    this.dataload(this.next);
+    this.dataload(this.next, this.filter);
   }
   moveToPagePrevious(): void {
-    this.dataload(this.previous);
+    this.dataload(this.previous, this.filter);
   }
 
   onFileSelected(event:any) {
@@ -85,7 +86,7 @@ export class FrontendMainComponent implements OnInit{
       formData.append('uploaded_by', user_id);
       self.fileService.createFile(formData).subscribe(resp => {
         self.showToastr.showSucces('Fichero subido al server', 'INFO!');
-        self.dataload(null);
+        self.dataload(null, self.filter);
         self.cleanFileInput();
         self.fileLoading = false;
       }, error => {
@@ -107,7 +108,7 @@ export class FrontendMainComponent implements OnInit{
       this.tableLoading = true;
       this.fileService.deleteFile(id).subscribe(resp =>{
         this.showToastr.showInfo('Fichero eliminado', 'INFO!');
-        this.dataload(null);
+        this.dataload(null, this.filter);
         this.tableLoading = false;
       }, error => {
         this.showToastr.showError('Fichero no eliminado, contacte con el admon', 'Error!');
@@ -161,6 +162,9 @@ export class FrontendMainComponent implements OnInit{
       this.tableLoading = false;
     })
   }
-
+  applyFilter(event:any) {
+    this.filter = (event.target as HTMLInputElement).value;
+    this.dataload(null, this.filter);
+  }
 }
 
