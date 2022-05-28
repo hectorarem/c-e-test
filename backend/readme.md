@@ -27,6 +27,22 @@ Backend
 
         python manage.py runserver
 
+### Unit Test
+System endpoints are tested. Each test is unitary for each application.
+Tested functionalities.
+1. login
+2. logout
+3. user registration
+4. List files
+5. Create file
+6. Update file name
+7. Details of the created file
+
+You can run
+        
+     python manage.py test
+     
+The test code is in the test.py file of each application.
 
 ### Deployed
 The application is currently online at the address
