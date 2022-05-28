@@ -37,7 +37,7 @@
         {{file.uploaded_by}}
       </td>
       <td>
-          <span id="file_{{file.id}}">{{file.file_name}}</span>
+          <span (dblclick)="activeEditFileName(file.id)" id="file_{{file.id}}">{{file.file_name}}</span>
 
         <div id="file_id_{{file.id}}" hidden>
           <input style="padding: 5px" id="file_name_id_{{file.id}}" type="text" value="{{file.file_name}}">
