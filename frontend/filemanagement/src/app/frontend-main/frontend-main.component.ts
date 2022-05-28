@@ -149,16 +149,19 @@ export class FrontendMainComponent implements OnInit{
   changeFileName(id:string) {
     this.tableLoading = true;
     const filename = document.getElementById('file_name_id_' + id) as HTMLInputElement;
+    let download_element = document.getElementById('download_file_id_' + id) as HTMLLinkElement;
     const fileExt = document.getElementById('file_ext_' + id) as HTMLSpanElement;
     this.fileService.changeFileName(id, filename.value, fileExt.innerHTML).subscribe(resp => {
       let new_name = document.getElementById('file_' + id) as HTMLSpanElement;
+      const old_filename = new_name.innerHTML;
       new_name.innerHTML = filename.value;
       this.inactiveFileName(id);
       this.showToastr.showSucces("Nombre del fichero cambiado exitosamente!", "Super!!");
+      let aux = download_element.href;
+      download_element.href = aux.replace(`${old_filename}.${fileExt.innerHTML}`, `${filename.value}.${fileExt.innerHTML}`);
       this.tableLoading = false;
-      // todo hay que actualizar la url de descarga tambien, para no hacer un reload a la tabla
     }, error => {
-      this.showToastr.showInfo(error.error.msg, "Ups!!")
+      this.showToastr.showInfo(error.error.msg, "Ups!!");
       this.tableLoading = false;
     })
   }
