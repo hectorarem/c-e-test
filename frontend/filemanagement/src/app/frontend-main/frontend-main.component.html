@@ -14,7 +14,9 @@
   </div>
 </div>
 <div class="content">
+  <mat-progress-bar *ngIf="tableLoading" mode="indeterminate"></mat-progress-bar>
   <table class="styled-table">
+
     <thead>
     <tr>
       <th *ngFor="let name of displayedColumns">
