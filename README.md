@@ -27,3 +27,7 @@ Once the file has been zipped, the user of the community site can download the f
 2. Django `4.0.4`
 3. Django Rest Framework `3.13.x`
 4. You can see more <a href="https://github.com/hectorarem/c-e-test/blob/main/backend/requirements.txt">here</a>
+
+### GitHub Kanban
+
+<a href="https://github.com/hectorarem/c-e-test/projects/1">KANBAN</a>
