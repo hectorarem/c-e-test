@@ -52,7 +52,7 @@ class ChangeFileNameApiView(APIView):
                     with ZipFile(file.file.path, 'r') as zip_ref:
                         zip_ref.extractall(settings.MEDIA_ROOT / 'upload')
                         old_file_zip = file.file.path
-                        old_file = old_file_zip.replace('.zip', '')
+                        old_file = ".".join(old_file_zip.split('.')[:-1])
                         new_name = f'upload/{name}.{file.file_extension}'
                         new_file = settings.MEDIA_ROOT / new_name
                         os.renames(old_file, new_file)
