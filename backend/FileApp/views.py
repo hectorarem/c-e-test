@@ -3,6 +3,7 @@ from zipfile import ZipFile
 from rest_framework import status
 from django.http import JsonResponse
 from django.conf import settings
+from django.db.models import Q
 from rest_framework.views import APIView
 from rest_framework.viewsets import ModelViewSet
 from .serializers import FileSerializer, ReadFileSerializer
@@ -14,6 +15,9 @@ class FileViewSet(ModelViewSet):
 
     def get_queryset(self):
         queryset = File.objects.all()
+        filter = self.request.GET.get('filter', None)
+        if filter:
+            queryset = queryset.filter(Q(file__icontains=filter) | Q(uploaded_by__username__icontains=filter)).distinct()
         return queryset
 
     def __init__(self, *args, **kwargs):
